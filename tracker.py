@@ -13,12 +13,29 @@ class Application(tk.Frame):
         self.hi_there["command"] = self.say_hi
         self.hi_there.pack(side="top")
 
+        self.info = tk.Button(self)
+        self.info["text"] = "User info button"
+        self.info["command"] = self.info
+        self.info.pack(side="left")
+
+        self.info = tk.Button(self)
+        self.info["text"] = "News button"
+        self.info["command"] = self.news
+        self.info.pack(side="right")
+
         self.quit = tk.Button(self, text="QUIT", fg="red",
                               command=self.master.destroy)
         self.quit.pack(side="bottom")
 
     def say_hi(self):
         print("hi there, everyone!")
+
+    def info(self):
+        print("This leads to user info")
+
+    def news(self):
+        print("This leads to news")
+
 
 root = tk.Tk()
 app = Application(master=root)
