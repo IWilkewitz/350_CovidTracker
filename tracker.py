@@ -38,7 +38,20 @@ class Application(tk.Frame):
         e1.grid(row=0, column=1)
         e2.grid(row=1, column=1)
 
-        master.mainloop()
+        quit = tk.Button(master, 
+        text='QUIT', 
+        command=master.quit).grid(row=3, 
+                                    column=0, 
+                                    sticky=tk.W, 
+                                    pady=4)
+        forPas = tk.Button(master, 
+        text='Forget Password', 
+        command=master.quit).grid(row=3, 
+                                        column=1, 
+                                        sticky=tk.W, 
+                                        pady=4)
+        forPas["command"] = self.forgot
+        tk.mainloop()
 
     def info(self):
         print("This leads to user info")
@@ -46,6 +59,9 @@ class Application(tk.Frame):
     def news(self):
         print("This leads to news")
 
+    def resPas(self):
+        print("Reset Password Path")
+        
 
 root = tk.Tk()
 app = Application(master=root)
