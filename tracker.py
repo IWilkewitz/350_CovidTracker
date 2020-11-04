@@ -8,10 +8,10 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        self.hi_there = tk.Button(self)
-        self.hi_there["text"] = "Hello World\n(click me)"
-        self.hi_there["command"] = self.say_hi
-        self.hi_there.pack(side="top")
+        self.info = tk.Button(self)
+        self.info["text"] = "LOGIN"
+        self.info["command"] = self.say_hi
+        self.info.pack(side="top")
 
         self.info = tk.Button(self)
         self.info["text"] = "User info button"
@@ -27,8 +27,19 @@ class Application(tk.Frame):
                               command=self.master.destroy)
         self.quit.pack(side="bottom")
 
+
     def say_hi(self):
-        print("hi there, everyone!")
+        master = tk.Tk()
+        tk.Label(master, text="First Name").grid(row=0)
+        tk.Label(master, text="Last Name").grid(row=1)
+
+        e1 = tk.Entry(master)
+        e2 = tk.Entry(master)
+
+        e1.grid(row=0, column=1)
+        e2.grid(row=1, column=1)
+
+        master.mainloop()
 
     def info(self):
         print("This leads to user info")
