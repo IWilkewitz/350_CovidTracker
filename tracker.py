@@ -51,17 +51,64 @@ class Application(tk.Frame):
         forPas["command"] = self.resPas
         forPas.grid(row=2, column=1)
 
-        #Login button
+        # #Login button
         logBut = tk.Button(loginWindow)
-        logBut["text"] = "Login"
-        logBut["command"] = self.userLogin
+        logBut["text"] = "Sign In"
+        logBut["command"] = self.appPage
         logBut.grid(row=2, column=3)
 
         #not sure if this line is needed but i'll keep it around just in case
         #tk.mainloop()
 
+    def appPage(self):
+        appPage = tk.Toplevel(root)
+        appPage.title("Application")
+        appPage.geometry("250x100")
 
-    #placeholder button functions
+        appQuit = tk.Button(appPage)
+        appQuit["text"] = "Back"
+        appQuit["command"] = appPage.destroy
+        appQuit.grid(row=2, column=0, pady=15)
+
+        survey = tk.Button(appPage)
+        survey["text"] = "Survey"
+        survey["command"] = appPage.destroy
+        survey.grid(row=2, column=2)
+
+        UserInfo = tk.Button(appPage)
+        UserInfo["text"] = "User Info"
+        UserInfo["command"] = appPage.destroy
+        UserInfo.grid(row=2, column=3)
+
+        news = tk.Button(appPage)
+        news["text"] = "News"
+        news["command"] = appPage.destroy
+        news.grid(row=2, column=4)
+        # tk.Label(loginWindow, text="Username: ").grid(row=0, pady=5)
+        # tk.Label(loginWindow, text="Password: ").grid(row=1)
+
+        # tk.Entry(loginWindow).grid(row=0, column=1)
+        # tk.Entry(loginWindow).grid(row=1, column=1)
+
+        # #This button closes the login screen
+        # loginQuit = tk.Button(loginWindow)
+        # loginQuit["text"] = "NEWS"
+        # loginQuit["command"] = loginWindow.destroy
+        # loginQuit.grid(row=2, column=0, pady=15)
+
+        # #Forgot password button
+        # forPas = tk.Button(loginWindow)
+        # forPas["text"] = "SURVEY"
+        # forPas["command"] = self.resPas
+        # forPas.grid(row=2, column=1)
+
+        # #Login button
+        # logBut = tk.Button(loginWindow)
+        # logBut["text"] = "Sign In"
+        # logBut["command"] = self.userLogin
+        # logBut.grid(row=2, column=3)
+
+        #placeholder button functions
     def infopage(self):
         print("This leads to user info")
 
@@ -69,10 +116,7 @@ class Application(tk.Frame):
         print("This leads to news")
 
     def resPas(self):
-        print("Reset Password Path")
-
-    def userLogin(self):
-        print("This leads to the user's homepage (when legitimate credentials are inputted)")
+        print("This leads to theReset Password Path")
 
 
 root = tk.Tk()
