@@ -47,9 +47,6 @@ class Application(tk.Frame):
         logBut["command"] = self.appPage
         logBut.grid(row=2, column=3)
 
-        #not sure if this line is needed but i'll keep it around just in case
-        #tk.mainloop()
-
     def appPage(self):
         appPage = tk.Toplevel(root)
         appPage.title("Application")
