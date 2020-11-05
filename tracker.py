@@ -27,7 +27,7 @@ class Application(tk.Frame):
         tk.Label(loginWindow, text="Password: ").grid(row=1)
 
         tk.Entry(loginWindow).grid(row=0, column=1)
-        tk.Entry(loginWindow).grid(row=1, column=1)
+        tk.Entry(loginWindow, show="•").grid(row=1, column=1)
 
         #This button closes the login screen
         loginQuit = tk.Button(loginWindow)
@@ -56,24 +56,24 @@ class Application(tk.Frame):
         appPage.geometry("250x100")
 
         appQuit = tk.Button(appPage)
-        appQuit["text"] = "Back"
+        appQuit["text"] = "Log Out"
         appQuit["command"] = appPage.destroy
-        appQuit.grid(row=2, column=0, pady=15)
+        appQuit.grid(row=1, column=1, pady=5)
 
         survey = tk.Button(appPage)
         survey["text"] = "Survey"
         survey["command"] = self.survey
-        survey.grid(row=2, column=2)
+        survey.grid(row=0, column=0, padx=10, pady=15)
 
         UserInfo = tk.Button(appPage)
         UserInfo["text"] = "User Info"
         UserInfo["command"] = self.userPage
-        UserInfo.grid(row=2, column=3)
+        UserInfo.grid(row=0, column=1, padx=10, pady=15)
 
         news = tk.Button(appPage)
         news["text"] = "News"
         news["command"] = self.newsPage
-        news.grid(row=2, column=4)
+        news.grid(row=0, column=3, padx=10, pady=15)
 
     def forgotPass(self):
         forPass = tk.Toplevel(root)
