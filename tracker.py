@@ -14,16 +14,6 @@ class Application(tk.Frame):
         self.login["command"] = self.loginpage
         self.login.grid(row=1, column=1, pady=5)
 
-        self.info = tk.Button(self)
-        self.info["text"] = "User info button"
-        self.info["command"] = self.infopage
-        self.info.grid(row=2, column=0, pady=5, padx=5)
-
-        self.info = tk.Button(self)
-        self.info["text"] = "News button"
-        self.info["command"] = self.news
-        self.info.grid(row=2, column=2, padx=5)
-
         self.quit = tk.Button(self, text="QUIT", fg="red",
                               command=self.master.destroy)
         self.quit.grid(row=3, column=1, pady=5)
