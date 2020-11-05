@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.ttk
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -10,50 +11,58 @@ class Application(tk.Frame):
     def create_widgets(self):
         self.login = tk.Button(self)
         self.login["text"] = "Login"
-        self.login["command"] = self.say_hi
-        self.login.pack(side="top")
+        self.login["command"] = self.loginpage
+        self.login.grid(row=1, column=1, pady=5)
 
         self.info = tk.Button(self)
         self.info["text"] = "User info button"
-        self.info["command"] = self.info
-        self.info.pack(side="left")
+        self.info["command"] = self.infopage
+        self.info.grid(row=2, column=0, pady=5, padx=5)
 
         self.info = tk.Button(self)
         self.info["text"] = "News button"
         self.info["command"] = self.news
-        self.info.pack(side="right")
+        self.info.grid(row=2, column=2, padx=5)
 
         self.quit = tk.Button(self, text="QUIT", fg="red",
                               command=self.master.destroy)
-        self.quit.pack(side="bottom")
+        self.quit.grid(row=3, column=1, pady=5)
 
-    def say_hi(self):
-        master = tk.Tk()
-        tk.Label(master, text="Username: ").grid(row=0)
-        tk.Label(master, text="Password: ").grid(row=1)
+    def loginpage(self):
+        loginWindow = tk.Toplevel(root)
+        loginWindow.title("Login Window")
+        loginWindow.geometry("250x100")
 
-        e1 = tk.Entry(master)
-        e2 = tk.Entry(master)
+        tk.Label(loginWindow, text="Username: ").grid(row=0, pady=5)
+        tk.Label(loginWindow, text="Password: ").grid(row=1)
 
-        e1.grid(row=0, column=1)
-        e2.grid(row=1, column=1)
+        tk.Entry(loginWindow).grid(row=0, column=1)
+        tk.Entry(loginWindow).grid(row=1, column=1)
 
-        quit = tk.Button(master, 
-        text='QUIT', 
-        command=master.quit).grid(row=3, 
-                                    column=0, 
-                                    sticky=tk.W, 
-                                    pady=4)
-        forPas = tk.Button(master, 
-        text='Forget Password', 
-        command=master.quit).grid(row=3, 
-                                        column=1, 
-                                        sticky=tk.W, 
-                                        pady=4)
-        forPas["command"] = self.forgot
-        tk.mainloop()
+        #This button closes the login screen
+        loginQuit = tk.Button(loginWindow)
+        loginQuit["text"] = "Back"
+        loginQuit["command"] = loginWindow.destroy
+        loginQuit.grid(row=2, column=0, pady=15)
 
-    def info(self):
+        #Forgot password button
+        forPas = tk.Button(loginWindow)
+        forPas["text"] = "Forgot Password"
+        forPas["command"] = self.resPas
+        forPas.grid(row=2, column=1)
+
+        #Login button
+        logBut = tk.Button(loginWindow)
+        logBut["text"] = "Login"
+        logBut["command"] = self.userLogin
+        logBut.grid(row=2, column=3)
+
+        #not sure if this line is needed but i'll keep it around just in case
+        #tk.mainloop()
+
+
+    #placeholder button functions
+    def infopage(self):
         print("This leads to user info")
 
     def news(self):
@@ -61,7 +70,10 @@ class Application(tk.Frame):
 
     def resPas(self):
         print("Reset Password Path")
-        
+
+    def userLogin(self):
+        print("This leads to the user's homepage (when legitimate credentials are inputted)")
+
 
 root = tk.Tk()
 app = Application(master=root)
