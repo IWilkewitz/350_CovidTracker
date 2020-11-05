@@ -107,5 +107,6 @@ class Application(tk.Frame):
         no.grid(row=3, column=1, pady=5)
 
 root = tk.Tk()
+root.title("MegaTrace")
 app = Application(master=root)
 app.mainloop()
