@@ -38,7 +38,7 @@ class Application(tk.Frame):
         #Forgot password button
         forPas = tk.Button(loginWindow)
         forPas["text"] = "Forgot Password"
-        forPas["command"] = self.resPas
+        forPas["command"] = self.forgotPass
         forPas.grid(row=2, column=1)
 
         # #Login button
@@ -62,17 +62,17 @@ class Application(tk.Frame):
 
         survey = tk.Button(appPage)
         survey["text"] = "Survey"
-        survey["command"] = appPage.destroy
+        survey["command"] = self.survey
         survey.grid(row=2, column=2)
 
         UserInfo = tk.Button(appPage)
         UserInfo["text"] = "User Info"
-        UserInfo["command"] = appPage.destroy
+        UserInfo["command"] = self.userPage
         UserInfo.grid(row=2, column=3)
 
         news = tk.Button(appPage)
         news["text"] = "News"
-        news["command"] = appPage.destroy
+        news["command"] = self.newsPage
         news.grid(row=2, column=4)
         # tk.Label(loginWindow, text="Username: ").grid(row=0, pady=5)
         # tk.Label(loginWindow, text="Password: ").grid(row=1)
@@ -99,6 +99,40 @@ class Application(tk.Frame):
         # logBut.grid(row=2, column=3)
 
         #placeholder button functions
+
+    def forgotPass(self):
+        forPass = tk.Toplevel(root)
+        forPass.title("Forgot Password")
+        forPass.geometry("250x100")
+
+        tk.Label(loginWindow, text="Email Address or Phone Number: ").grid(row=0, pady=5)
+
+        tk.Entry(loginWindow).grid(row=0, column=1)
+
+    def userPage(self):
+        usrPage = tk.Toplevel(root)
+        usrPage.title("User Profile")
+        usrPage.geometry("100x100")
+
+    def newsPage(self):
+        newsPage = tk.Toplevel(root)
+        newsPage.title("COVID-19 NEWS")
+        newsPage.geometry("100x100")
+
+    def survey(self):
+        surPage = tk.Toplevel(root)
+        surPage.title("COVID-19 Survey")
+        surPage.geometry("100x100")
+
+        yes = tk.Button(surPage)
+        yes["text"] = "YES"
+        yes["command"] = surPage.destroy
+        yes.grid(row=1, column=1, pady=5)
+
+        no = tk.Button(surPage)
+        no["text"] = "NO"
+        no["command"] = surPage.destroy
+        no.grid(row=3, column=1, pady=5)
     def infopage(self):
         print("This leads to user info")
 
