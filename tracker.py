@@ -78,11 +78,11 @@ class Application(tk.Frame):
     def forgotPass(self):
         forPass = tk.Toplevel(root)
         forPass.title("Forgot Password")
-        forPass.geometry("250x100")
+        forPass.geometry("350x30")
 
-        tk.Label(loginWindow, text="Email Address or Phone Number: ").grid(row=0, pady=5)
+        tk.Label(forPass, text="Enter Email Address or Phone Number: ").grid(row=0, pady=5)
 
-        tk.Entry(loginWindow).grid(row=0, column=1)
+        tk.Entry(forPass).grid(row=0, column=1)
 
     def userPage(self):
         usrPage = tk.Toplevel(root)
