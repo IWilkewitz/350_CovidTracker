@@ -74,31 +74,6 @@ class Application(tk.Frame):
         news["text"] = "News"
         news["command"] = self.newsPage
         news.grid(row=2, column=4)
-        # tk.Label(loginWindow, text="Username: ").grid(row=0, pady=5)
-        # tk.Label(loginWindow, text="Password: ").grid(row=1)
-
-        # tk.Entry(loginWindow).grid(row=0, column=1)
-        # tk.Entry(loginWindow).grid(row=1, column=1)
-
-        # #This button closes the login screen
-        # loginQuit = tk.Button(loginWindow)
-        # loginQuit["text"] = "NEWS"
-        # loginQuit["command"] = loginWindow.destroy
-        # loginQuit.grid(row=2, column=0, pady=15)
-
-        # #Forgot password button
-        # forPas = tk.Button(loginWindow)
-        # forPas["text"] = "SURVEY"
-        # forPas["command"] = self.resPas
-        # forPas.grid(row=2, column=1)
-
-        # #Login button
-        # logBut = tk.Button(loginWindow)
-        # logBut["text"] = "Sign In"
-        # logBut["command"] = self.userLogin
-        # logBut.grid(row=2, column=3)
-
-        #placeholder button functions
 
     def forgotPass(self):
         forPass = tk.Toplevel(root)
@@ -133,15 +108,6 @@ class Application(tk.Frame):
         no["text"] = "NO"
         no["command"] = surPage.destroy
         no.grid(row=3, column=1, pady=5)
-    def infopage(self):
-        print("This leads to user info")
-
-    def news(self):
-        print("This leads to news")
-
-    def resPas(self):
-        print("This leads to theReset Password Path")
-
 
 root = tk.Tk()
 app = Application(master=root)
