@@ -30,7 +30,7 @@ class Application(tk.Frame):
     def loginpage(self):
         loginWindow = tk.Toplevel(root)
         loginWindow.title("Login Window")
-        loginWindow.geometry("450x600")
+        loginWindow.geometry("450x400")
 
         tk.Label(loginWindow, text="Username: ", font=("Helvetica", 16)).grid(row=0, pady=5)
         tk.Label(loginWindow, text="Password: ", font=("Helvetica", 16)).grid(row=1)
@@ -62,32 +62,39 @@ class Application(tk.Frame):
     def appPage(self):
         appPage = tk.Toplevel(root)
         appPage.title("Application")
-        appPage.geometry("450x600")
+        appPage.geometry("450x400")
 
-        appQuit = tk.Button(appPage)
+        label = tk.Label(appPage, text="Home Screen", font=("Helvetica", 24))
+        label.grid(row=0, column=1)
+
+        appQuit = tk.Button(appPage, width=42, height=3)
         appQuit["text"] = "Log Out"
         appQuit["command"] = appPage.destroy
-        appQuit.grid(row=1, column=1, pady=5)
+        appQuit["font"] = ("Helvetica", 12, "bold")
+        appQuit.grid(row=4, column=1, pady=10)
 
-        survey = tk.Button(appPage)
+        survey = tk.Button(appPage, width=42, height=3)
         survey["text"] = "Survey"
         survey["command"] = self.survey
-        survey.grid(row=0, column=0, padx=10, pady=15)
+        survey["font"] = ("Helvetica", 12, "bold")
+        survey.grid(row=3, column=1, padx=10, pady=10)
 
-        UserInfo = tk.Button(appPage)
+        UserInfo = tk.Button(appPage, width=42, height=3)
         UserInfo["text"] = "User Info"
         UserInfo["command"] = self.userPage
-        UserInfo.grid(row=0, column=1, padx=10, pady=15)
+        UserInfo["font"] = ("Helvetica", 12, "bold")
+        UserInfo.grid(row=2, column=1, padx=10, pady=10)
 
-        news = tk.Button(appPage)
+        news = tk.Button(appPage, width=42, height=3)
         news["text"] = "News"
         news["command"] = self.newsPage
-        news.grid(row=0, column=3, padx=10, pady=15)
+        news["font"] = ("Helvetica", 12, "bold")
+        news.grid(row=1, column=1, padx=10, pady=10)
 
     def forgotPass(self):
         forPass = tk.Toplevel(root)
         forPass.title("Forgot Password")
-        forPass.geometry("450x600")
+        forPass.geometry("450x400")
 
         tk.Label(forPass, text="Enter Email Address or Phone Number: ").grid(row=0, pady=5)
 
@@ -96,17 +103,17 @@ class Application(tk.Frame):
     def userPage(self):
         usrPage = tk.Toplevel(root)
         usrPage.title("User Profile")
-        usrPage.geometry("450x600")
+        usrPage.geometry("450x400")
 
     def newsPage(self):
         newsPage = tk.Toplevel(root)
         newsPage.title("COVID-19 NEWS")
-        newsPage.geometry("450x600")
+        newsPage.geometry("450x400")
 
     def survey(self):
         surPage = tk.Toplevel(root)
         surPage.title("COVID-19 Survey")
-        surPage.geometry("450x600")
+        surPage.geometry("450x400")
 
         yes = tk.Button(surPage)
         yes["text"] = "YES"
@@ -119,7 +126,7 @@ class Application(tk.Frame):
         no.grid(row=3, column=1, pady=5)
 
 root = tk.Tk()
-root.geometry("450x600")
+root.geometry("450x400")
 #root.configure(bg='#8cdbed')
 root.title("MegaTrace")
 app = Application(master=root)
