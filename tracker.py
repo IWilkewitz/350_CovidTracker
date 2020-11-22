@@ -12,7 +12,8 @@ class Application(tk.Frame):
         self.login = tk.Button(self)
         self.login["text"] = "Login"
         self.login["command"] = self.loginpage
-        self.login.grid(row=1, column=1, pady=5)
+        self.login.grid(row=1, column=1, pady=50)
+        self.login.config(width=50, height=3)
 
         self.quit = tk.Button(self, text="QUIT", fg="red",
                               command=self.master.destroy)
@@ -107,6 +108,8 @@ class Application(tk.Frame):
         no.grid(row=3, column=1, pady=5)
 
 root = tk.Tk()
+root.geometry("400x600")
+#root.configure(bg='#8cdbed')
 root.title("MegaTrace")
 app = Application(master=root)
 app.mainloop()
