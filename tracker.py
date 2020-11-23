@@ -152,9 +152,11 @@ class Application(tk.Frame):
         forPass.title("Forgot Password")
         forPass.geometry("450x400")
 
-        tk.Label(forPass, text="Enter Email Address or Phone Number: ").grid(row=0, pady=5)
+        tk.Label(forPass, text="Enter Your Email: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
+        tk.Label(forPass, text="Enter Your Phone Number: ", font=("Helvetica", 16)).grid(row=2, column=1, pady=5)
 
-        tk.Entry(forPass).grid(row=0, column=1)
+        tk.Entry(forPass, width=50).grid(row=1, column=1, pady=5)
+        tk.Entry(forPass, show="•", width=50).grid(row=3, column=1, pady=5)
 
     def userPage(self):
         usrInfo = tk.Toplevel(root)
