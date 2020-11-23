@@ -131,3 +131,7 @@ root.geometry("450x400")
 root.title("MegaTrace")
 app = Application(master=root)
 app.mainloop()
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
