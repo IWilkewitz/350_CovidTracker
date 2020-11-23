@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.ttk
+import re
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -36,7 +37,7 @@ class Application(tk.Frame):
         tk.Label(loginWindow, text="Password: ", font=("Helvetica", 16)).grid(row=1)
 
         tk.Entry(loginWindow, width=50).grid(row=0, column=1)
-        tk.Entry(loginWindow, show="•", width=50).grid(row=1, column=1)
+        tk.Entry(loginWindow, show="$", width=50).grid(row=1, column=1)
 
         #This button closes the login screen
         loginQuit = tk.Button(loginWindow, width=30, height=3)
@@ -98,9 +99,6 @@ class Application(tk.Frame):
 
         tk.Label(forPass, text="Enter Your Email: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
         tk.Label(forPass, text="Enter Your Phone Number: ", font=("Helvetica", 16)).grid(row=2, column=1, pady=5)
-
-        tk.Entry(forPass, width=50).grid(row=1, column=1, pady=5)
-        tk.Entry(forPass, show="•", width=50).grid(row=3, column=1, pady=5)
 
     def userPage(self):
         usrPage = tk.Toplevel(root)
