@@ -36,7 +36,7 @@ class Application(tk.Frame):
         tk.Label(loginWindow, text="Password: ", font=("Helvetica", 16)).grid(row=1)
 
         tk.Entry(loginWindow, width=50).grid(row=0, column=1)
-        tk.Entry(loginWindow, show="•", width=50).grid(row=1, column=1)
+        tk.Entry(loginWindow, show="$", width=50).grid(row=1, column=1)
 
         #This button closes the login screen
         loginQuit = tk.Button(loginWindow, width=30, height=3)
