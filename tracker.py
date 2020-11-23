@@ -1,6 +1,6 @@
 import tkinter as tk
 import tkinter.ttk
-
+from tkinter import Tk, Canvas, Frame, BOTH
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -9,6 +9,8 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
+        #create_widgets.geometry("450x400")
+
         self.title = tk.Label(self, text="Welcome to MegaTrace", font=("Helvetica", 24))
         self.title.grid(row=0, column=1, pady=25)
         self.title = tk.Label(self, text="Please sign in to continue:", font=("Helvetica", 16))
@@ -18,14 +20,68 @@ class Application(tk.Frame):
         self.login["text"] = "Login"
         self.login["font"] = ("Helvetica", 12, "bold")
         self.login["command"] = self.loginpage
-        self.login.grid(row=2, column=1, pady=50)
+        self.login.grid(row=2, column=1, pady=5)
         self.login.config(width=35, height=3)
+
+        self.signUp = tk.Button(self)
+        self.signUp["text"] = "Sign Up"
+        self.signUp["font"] = ("Helvetica", 12, "bold")
+        self.signUp["command"] = self.signUpPage
+        self.signUp.grid(row=3, column=1, pady=5)
+        self.signUp.config(width=35, height=3)
 
         self.quit = tk.Button(self, text="QUIT", fg="red",
                               command=self.master.destroy)
-        self.quit.grid(row=3, column=1, pady=5)
+        self.quit.grid(row=4, column=1, pady=5)
         self.quit.config(width=35, height=3)
         self.quit["font"] = ("Helvetica", 12, "bold")
+
+
+
+    def signUpPage2(self):
+        signUpWindow2 = tk.Toplevel(root)
+        signUpWindow2.title("Sign Up")
+        signUpWindow2.geometry("450x400")
+
+        tk.Label(signUpWindow2, text="First Name: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
+        tk.Label(signUpWindow2, text="Last Name: ", font=("Helvetica", 16)).grid(row=2, column=1, pady=5)
+        tk.Label(signUpWindow2, text="Date of Birth (MM/DD/YYYY): ", font=("Helvetica", 16)).grid(row=4,column=1, pady=5)
+        tk.Label(signUpWindow2, text="Email: ", font=("Helvetica", 16)).grid(row=6,column=1, pady=5)
+        tk.Label(signUpWindow2, text="Phone Number: ", font=("Helvetica", 16)).grid(row=8, column=1, pady=5)
+
+        tk.Entry(signUpWindow2, width=50).grid(row=1, column=1, pady=5)
+        tk.Entry(signUpWindow2, show="•", width=50).grid(row=3, column=1, pady=5)
+        tk.Entry(signUpWindow2, show="•", width=50).grid(row=5, column=1, pady=5)
+        tk.Entry(signUpWindow2, show="•", width=50).grid(row=7, column=1, pady=5)
+        tk.Entry(signUpWindow2, show="•", width=50).grid(row=9, column=1, pady=5)
+
+        # #NextPage button
+        nextStep2 = tk.Button(signUpWindow2, width=30, height=3)
+        nextStep2["text"] = "Sign Up!"
+        nextStep2["command"] = self.appPage
+        nextStep2["font"] = ("Helvetica", 12, "bold")
+        nextStep2.grid(row=10, column=1, pady=5)
+        nextStep2.config(width=35, height=3)
+
+    def signUpPage(self):
+        signUpWindow = tk.Toplevel(root)
+        signUpWindow.title("Sign Up")
+        signUpWindow.geometry("450x400")
+        usernameInfo = tk.Label(signUpWindow, text="(Must Be Minimum of 8 characters)", font=("Helvetica", 12))
+        usernameInfo.grid(row=4, column=1, pady=5)
+        tk.Label(signUpWindow, text="Choose a Username: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
+        tk.Label(signUpWindow, text="Choose a Password: ", font=("Helvetica", 16)).grid(row=2, column=1, pady=5)
+
+        tk.Entry(signUpWindow, width=50).grid(row=1, column=1, pady=5)
+        tk.Entry(signUpWindow, show="•", width=50).grid(row=3, column=1, pady=5)
+
+        # #NextPage button
+        nextStep = tk.Button(signUpWindow, width=30, height=3)
+        nextStep["text"] = "Next"
+        nextStep["command"] = self.signUpPage2
+        nextStep["font"] = ("Helvetica", 12, "bold")
+        nextStep.grid(row=5, column=1, pady=5)
+        nextStep.config(width=35, height=3)
 
     def loginpage(self):
         loginWindow = tk.Toplevel(root)
@@ -54,7 +110,7 @@ class Application(tk.Frame):
 
         # #Login button
         logBut = tk.Button(loginWindow, width=30, height=3)
-        logBut["text"] = "Sign In"
+        logBut["text"] = "Login"
         logBut["command"] = self.appPage
         logBut["font"] = ("Helvetica", 12, "bold")
         logBut.grid(row=2, column=1, pady=15)
@@ -101,9 +157,27 @@ class Application(tk.Frame):
         tk.Entry(forPass).grid(row=0, column=1)
 
     def userPage(self):
-        usrPage = tk.Toplevel(root)
-        usrPage.title("User Profile")
-        usrPage.geometry("450x400")
+        usrInfo = tk.Toplevel(root)
+        usrInfo.geometry("450x400")
+
+        #canvas = Canvas(usrInfo)
+        #canvas.create_rectangle(170, 20, 280, 120)
+
+        tk.Label(usrInfo, text="First Name: ", font=("Helvetica", 16)).grid(row=5,column=0, pady=5)
+        tk.Label(usrInfo, text="Last Name: ", font=("Helvetica", 16)).grid(row=6, column=0, pady=5)
+        tk.Label(usrInfo, text="Date of Birth (MM/DD/YYYY): ", font=("Helvetica", 16)).grid(row=7,column=0, pady=5)
+        tk.Label(usrInfo, text="Email: ", font=("Helvetica", 16)).grid(row=8,column=0, pady=5)
+        tk.Label(usrInfo, text="Phone Number: ", font=("Helvetica", 16)).grid(row=9, column=0, pady=5)
+        tk.Label(usrInfo, text="Address: ", font=("Helvetica", 16)).grid(row=10,column=0, pady=5)
+        
+        # #NextPage button
+        edit = tk.Button(usrInfo, width=30, height=3)
+        edit["text"] = "Edit User Profile"
+        edit["command"] = self.signUpPage2
+        edit["font"] = ("Helvetica", 12, "bold")
+        edit.grid(row=11, column=0, pady=5)
+        edit.config(width=35, height=3)
+
 
     def newsPage(self):
         newsPage = tk.Toplevel(root)
