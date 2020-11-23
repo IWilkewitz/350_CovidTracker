@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.ttk
+import re
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -99,7 +100,23 @@ class Application(tk.Frame):
         tk.Label(forPass, text="Enter Email Address or Phone Number: ").grid(row=0, pady=5)
 
         tk.Entry(forPass).grid(row=0, column=1)
-
+        
+    # def validPhone(self):
+    #     regex = '^[(]?[0-9]{3,3}[)]?[0-9]{3,3}[-]?[0-9]{4,4}'
+    #
+    #     if (re.search(regex, phone)):
+    #         print("Valid phone number.")
+    #     else:
+    #         print("Invalid phone number.")
+    #
+    # def validEmail(self):
+    #     regex = '^[a-z]([w-]*[a-z]|[w-.]*[a-z]{2,}|[a-z])*@[a-z]([w-]*[a-z]|[w-.]*[a-z]{2,}|[a-z]){4,}?.[a-z]{2,}$'
+    #
+    #     if (re.search(regex, email)):
+    #         print("Valid email address.")
+    #     else:
+    #         print("Invalid email address.")
+    
     def userPage(self):
         usrPage = tk.Toplevel(root)
         usrPage.title("User Profile")
