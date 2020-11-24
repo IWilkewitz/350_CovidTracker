@@ -1,6 +1,12 @@
 import tkinter as tk
 import tkinter.ttk
+<<<<<<< HEAD
+from tkinter import Tk, Canvas, Frame, BOTH
+=======
 import re
+import urllib.request
+import bs4
+>>>>>>> 1e703e72f4c8cad5da0ede4c441051f97fa7fb5a
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -10,6 +16,8 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
+        #create_widgets.geometry("450x400")
+
         self.title = tk.Label(self, text="Welcome to MegaTrace", font=("Helvetica", 24))
         self.title.grid(row=0, column=1, pady=25)
         self.title = tk.Label(self, text="Please sign in to continue:", font=("Helvetica", 16))
@@ -19,14 +27,66 @@ class Application(tk.Frame):
         self.login["text"] = "Login"
         self.login["font"] = ("Helvetica", 12, "bold")
         self.login["command"] = self.loginpage
-        self.login.grid(row=2, column=1, pady=50)
+        self.login.grid(row=2, column=1, pady=5)
         self.login.config(width=35, height=3)
+
+        self.signUp = tk.Button(self)
+        self.signUp["text"] = "Sign Up"
+        self.signUp["font"] = ("Helvetica", 12, "bold")
+        self.signUp["command"] = self.signUpPage
+        self.signUp.grid(row=3, column=1, pady=5)
+        self.signUp.config(width=35, height=3)
 
         self.quit = tk.Button(self, text="QUIT", fg="red",
                               command=self.master.destroy)
-        self.quit.grid(row=3, column=1, pady=5)
+        self.quit.grid(row=4, column=1, pady=5)
         self.quit.config(width=35, height=3)
         self.quit["font"] = ("Helvetica", 12, "bold")
+
+    def signUpPage2(self):
+        signUpWindow2 = tk.Toplevel(root)
+        signUpWindow2.title("Sign Up")
+        signUpWindow2.geometry("450x400")
+
+        tk.Label(signUpWindow2, text="First Name: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
+        tk.Label(signUpWindow2, text="Last Name: ", font=("Helvetica", 16)).grid(row=2, column=1, pady=5)
+        tk.Label(signUpWindow2, text="Date of Birth (MM/DD/YYYY): ", font=("Helvetica", 16)).grid(row=4,column=1, pady=5)
+        tk.Label(signUpWindow2, text="Email: ", font=("Helvetica", 16)).grid(row=6,column=1, pady=5)
+        tk.Label(signUpWindow2, text="Phone Number: ", font=("Helvetica", 16)).grid(row=8, column=1, pady=5)
+
+        tk.Entry(signUpWindow2, width=50).grid(row=1, column=1, pady=5)
+        tk.Entry(signUpWindow2, show="•", width=50).grid(row=3, column=1, pady=5)
+        tk.Entry(signUpWindow2, show="•", width=50).grid(row=5, column=1, pady=5)
+        tk.Entry(signUpWindow2, show="•", width=50).grid(row=7, column=1, pady=5)
+        tk.Entry(signUpWindow2, show="•", width=50).grid(row=9, column=1, pady=5)
+
+        # #NextPage button
+        nextStep2 = tk.Button(signUpWindow2, width=30, height=3)
+        nextStep2["text"] = "Sign Up!"
+        nextStep2["command"] = self.appPage
+        nextStep2["font"] = ("Helvetica", 12, "bold")
+        nextStep2.grid(row=10, column=1, pady=5)
+        nextStep2.config(width=35, height=3)
+
+    def signUpPage(self):
+        signUpWindow = tk.Toplevel(root)
+        signUpWindow.title("Sign Up")
+        signUpWindow.geometry("450x400")
+        usernameInfo = tk.Label(signUpWindow, text="(Must Be Minimum of 8 characters)", font=("Helvetica", 12))
+        usernameInfo.grid(row=4, column=1, pady=5)
+        tk.Label(signUpWindow, text="Choose a Username: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
+        tk.Label(signUpWindow, text="Choose a Password: ", font=("Helvetica", 16)).grid(row=2, column=1, pady=5)
+
+        tk.Entry(signUpWindow, width=50).grid(row=1, column=1, pady=5)
+        tk.Entry(signUpWindow, show="•", width=50).grid(row=3, column=1, pady=5)
+
+        # #NextPage button
+        nextStep = tk.Button(signUpWindow, width=30, height=3)
+        nextStep["text"] = "Next"
+        nextStep["command"] = self.signUpPage2
+        nextStep["font"] = ("Helvetica", 12, "bold")
+        nextStep.grid(row=5, column=1, pady=5)
+        nextStep.config(width=35, height=3)
 
     def loginpage(self):
         loginWindow = tk.Toplevel(root)
@@ -55,7 +115,7 @@ class Application(tk.Frame):
 
         # #Login button
         logBut = tk.Button(loginWindow, width=30, height=3)
-        logBut["text"] = "Sign In"
+        logBut["text"] = "Login"
         logBut["command"] = self.appPage
         logBut["font"] = ("Helvetica", 12, "bold")
         logBut.grid(row=2, column=1, pady=15)
@@ -97,33 +157,159 @@ class Application(tk.Frame):
         forPass.title("Forgot Password")
         forPass.geometry("450x400")
 
-        tk.Label(forPass, text="Enter Your Email: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
-        tk.Label(forPass, text="Enter Your Phone Number: ", font=("Helvetica", 16)).grid(row=2, column=1, pady=5)
+        tk.Label(forPass, text="Enter Email: ", font=("Helvetica", 12)).grid(row=0,column=0, pady=5)
+        tk.Label(forPass, text="Enter Phone Number:", font=("Helvetica", 12)).grid(row=1, column=0, pady=5)
+
+        tk.Entry(forPass, width=40).grid(row=0, column=1, pady=5)
+        tk.Entry(forPass, show="•", width=40).grid(row=1, column=1, pady=5)
+
+        forLink = tk.Button(forPass, width=15, height=3)
+        forLink["text"] = "Send Reset Link"
+        forLink["command"] = self.destroy
+        forLink["font"] = ("Helvetica", 10, "bold")
+        forLink.grid(row=2, column=1, padx=10, pady=10)
+
+    def editUsr(self):
+        editPge = tk.Toplevel(root)
+        editPge.title("Sign Up")
+        editPge.geometry("450x450")
+
+        tk.Label(editPge, text="First Name: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
+        tk.Label(editPge, text="Last Name: ", font=("Helvetica", 16)).grid(row=2, column=1, pady=5)
+        tk.Label(editPge, text="Date of Birth (MM/DD/YYYY): ", font=("Helvetica", 16)).grid(row=4,column=1, pady=5)
+        tk.Label(editPge, text="Email: ", font=("Helvetica", 16)).grid(row=6,column=1, pady=5)
+        tk.Label(editPge, text="Phone Number: ", font=("Helvetica", 16)).grid(row=8, column=1, pady=5)
+
+        tk.Entry(editPge, width=50).grid(row=1, column=1, pady=5)
+        tk.Entry(editPge, show="•", width=50).grid(row=3, column=1, pady=5)
+        tk.Entry(editPge, show="•", width=50).grid(row=5, column=1, pady=5)
+        tk.Entry(editPge, show="•", width=50).grid(row=7, column=1, pady=5)
+        tk.Entry(editPge, show="•", width=50).grid(row=9, column=1, pady=5)
+
+        # #NextPage button
+        save = tk.Button(editPge, width=30, height=3)
+        save["text"] = "Save Changes"
+        save["command"] = self.userPage
+        save["font"] = ("Helvetica", 12, "bold")
+        save.grid(row=10, column=1, pady=5)
+        save.config(width=35, height=3)
 
     def userPage(self):
-        usrPage = tk.Toplevel(root)
-        usrPage.title("User Profile")
-        usrPage.geometry("450x400")
+        usrInfo = tk.Toplevel(root)
+        usrInfo.title("User Profile")
+        usrInfo.geometry("450x400")
+
+        #canvas = Canvas(usrInfo)
+        #canvas.create_rectangle(170, 20, 280, 120)
+
+        tk.Label(usrInfo, text="First Name: ", font=("Helvetica", 16)).grid(row=5,column=0, pady=5)
+        tk.Label(usrInfo, text="Last Name: ", font=("Helvetica", 16)).grid(row=6, column=0, pady=5)
+        tk.Label(usrInfo, text="Date of Birth (MM/DD/YYYY): ", font=("Helvetica", 16)).grid(row=7,column=0, pady=5)
+        tk.Label(usrInfo, text="Email: ", font=("Helvetica", 16)).grid(row=8,column=0, pady=5)
+        tk.Label(usrInfo, text="Phone Number: ", font=("Helvetica", 16)).grid(row=9, column=0, pady=5)
+        tk.Label(usrInfo, text="Address: ", font=("Helvetica", 16)).grid(row=10,column=0, pady=5)
+        tk.Label(usrInfo, text="Exposure Date: ", font=("Helvetica", 16)).grid(row=11,column=0, pady=5)
+        
+        # #NextPage button
+        edit = tk.Button(usrInfo, width=30, height=3)
+        edit["text"] = "Edit User Profile"
+        edit["command"] = self.editUsr
+        edit["font"] = ("Helvetica", 12, "bold")
+        edit.grid(row=11, column=0, pady=5)
+        edit.config(width=35, height=3)
 
     def newsPage(self):
         newsPage = tk.Toplevel(root)
         newsPage.title("COVID-19 NEWS")
         newsPage.geometry("450x400")
 
+<<<<<<< HEAD
+    def tracePge(self):
+        conTrace = tk.Toplevel(root)
+        conTrace.title("Contact Tracing Information")
+        conTrace.geometry("450x200")
+        tk.Label(conTrace, text="Enter First Name: ", font=("Helvetica", 12)).grid(row=0,column=0, pady=5)
+        tk.Label(conTrace, text="Enter Email: ", font=("Helvetica", 12)).grid(row=1,column=0, pady=5)
+        tk.Label(conTrace, text="Enter Phone Number:", font=("Helvetica", 12)).grid(row=2, column=0, pady=5)
+
+        tk.Entry(conTrace, width=30).grid(row=0, column=1, pady=5)
+        tk.Entry(conTrace, show="•", width=30).grid(row=1, column=1, pady=5)
+        tk.Entry(conTrace, show="•", width=30).grid(row=2, column=1, pady=5)
+        
+         # #NextPage button
+        addContact = tk.Button(conTrace, width=10, height=3)
+        addContact["text"] = "Add"
+        addContact["command"] = self.editUsr
+        addContact["font"] = ("Helvetica", 12, "bold")
+        addContact.grid(row=3, column=0)
+        addContact.config(width=10, height=3)
+
+         # #NextPage button
+        newContact = tk.Button(conTrace, width=10, height=3)
+        newContact["text"] = "New Contact"
+        newContact["command"] = self.tracePge
+        newContact["font"] = ("Helvetica", 12, "bold")
+        newContact.grid(row=3, column=1)
+        newContact.config(width=10, height=3)
+
+         # #NextPage button
+        doneButton = tk.Button(conTrace, width=10, height=3)
+        doneButton["text"] = "Done"
+        doneButton["command"] = self.destroy
+        doneButton["font"] = ("Helvetica", 12, "bold")
+        doneButton.grid(row=3, column=2)
+        doneButton.config(width=10, height=3)
+    
+    def exposure(self):
+        exPage = tk.Toplevel(root)
+        exPage.title("COVID-19 Survey")
+        exPage.geometry("400x150")
+
+        tk.Label(exPage, text="Possible Exposure Date: ", 
+        font=("Helvetica", 12)).grid(row=0, column=0, pady=5)
+        tk.Entry(exPage, width=40).grid(row=1, column=0, pady=5)
+
+        trace = tk.Button(exPage, width=30, height=3)
+        trace["text"] = "StartContact Tracing"
+        trace["command"] = self.tracePge
+        trace["font"] = ("Helvetica", 12, "bold")
+        trace.grid(row=11, column=0, pady=5)
+        trace.config(width=35, height=3)
+=======
+        #headline = getHeadline()
+        tk.Label(newsPage, text="Newest Michigan Covid News: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
+        tk.Label(newsPage, text="headline", font=("Helvetica", 16)).grid(row=1,column=1, pady=5)
+
+>>>>>>> 1e703e72f4c8cad5da0ede4c441051f97fa7fb5a
+
     def survey(self):
         surPage = tk.Toplevel(root)
         surPage.title("COVID-19 Survey")
-        surPage.geometry("450x400")
+        surPage.geometry("250x120")
+
+        tk.Label(surPage, text="Have You Had Covid-19? ", 
+        font=("Helvetica", 16)).grid(row=0, column=1, pady=5)
 
         yes = tk.Button(surPage)
         yes["text"] = "YES"
-        yes["command"] = surPage.destroy
+        yes["command"] = self.exposure
         yes.grid(row=1, column=1, pady=5)
 
         no = tk.Button(surPage)
         no["text"] = "NO"
         no["command"] = surPage.destroy
-        no.grid(row=3, column=1, pady=5)
+        no.grid(row=2, column=1, pady=5)
+
+""" def getHeadline():
+    url = 'https://www.mlive.com/#section__news'
+    html = urllib.request.urlopen(url).read()
+    parsed = bs4.BeautifulSoup(html, "html.parser")
+    data = parsed.find_all("h3")
+    headline = ""
+    for item in data:
+        if("COVID-19" in str(item) or "Coronavirus" in str(item)):
+            headline = str(item.text.strip())
+            return headline """
 
 root = tk.Tk()
 root.geometry("450x400")
