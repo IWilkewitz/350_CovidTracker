@@ -1,7 +1,8 @@
 import tkinter as tk
 import tkinter.ttk
 from tkinter import Tk, Canvas, Frame, BOTH
-
+import urllib.request
+import bs4
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -218,6 +219,18 @@ class Application(tk.Frame):
         newsPage.title("COVID-19 NEWS")
         newsPage.geometry("450x400")
 
+        url = 'https://www.mlive.com/#section__news'
+        html = urllib.request.urlopen(url).read()
+        parsed = bs4.BeautifulSoup(html, "html.parser")
+        data = parsed.find_all("h3")
+        headline = ""
+        for item in data:
+            if("COVID-19" in str(item) or "Coronavirus" in str(item)):
+                headline = str(item.text.strip())
+                break
+        
+        tk.Label(newsPage, text="Most Recent Michigan Covid Headline: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
+        tk.Label(newsPage, text=str(headline), font=("Helvetica", 16), wraplength=400).grid(row=1,column=1, pady=5)
 
     def tracePge(self):
         conTrace = tk.Toplevel(root)
@@ -270,8 +283,6 @@ class Application(tk.Frame):
         trace["font"] = ("Helvetica", 12, "bold")
         trace.grid(row=11, column=0, pady=5)
         trace.config(width=35, height=3)
-        tk.Label(newsPage, text="Newest Michigan Covid News: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
-        tk.Label(newsPage, text="headline", font=("Helvetica", 16)).grid(row=1,column=1, pady=5)
 
     def survey(self):
         surPage = tk.Toplevel(root)
