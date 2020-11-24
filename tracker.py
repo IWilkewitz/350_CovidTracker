@@ -1,12 +1,7 @@
 import tkinter as tk
 import tkinter.ttk
-<<<<<<< HEAD
 from tkinter import Tk, Canvas, Frame, BOTH
-=======
-import re
-import urllib.request
-import bs4
->>>>>>> 1e703e72f4c8cad5da0ede4c441051f97fa7fb5a
+
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -223,7 +218,7 @@ class Application(tk.Frame):
         newsPage.title("COVID-19 NEWS")
         newsPage.geometry("450x400")
 
-<<<<<<< HEAD
+
     def tracePge(self):
         conTrace = tk.Toplevel(root)
         conTrace.title("Contact Tracing Information")
@@ -275,12 +270,8 @@ class Application(tk.Frame):
         trace["font"] = ("Helvetica", 12, "bold")
         trace.grid(row=11, column=0, pady=5)
         trace.config(width=35, height=3)
-=======
-        #headline = getHeadline()
         tk.Label(newsPage, text="Newest Michigan Covid News: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
         tk.Label(newsPage, text="headline", font=("Helvetica", 16)).grid(row=1,column=1, pady=5)
-
->>>>>>> 1e703e72f4c8cad5da0ede4c441051f97fa7fb5a
 
     def survey(self):
         surPage = tk.Toplevel(root)
@@ -299,17 +290,6 @@ class Application(tk.Frame):
         no["text"] = "NO"
         no["command"] = surPage.destroy
         no.grid(row=2, column=1, pady=5)
-
-""" def getHeadline():
-    url = 'https://www.mlive.com/#section__news'
-    html = urllib.request.urlopen(url).read()
-    parsed = bs4.BeautifulSoup(html, "html.parser")
-    data = parsed.find_all("h3")
-    headline = ""
-    for item in data:
-        if("COVID-19" in str(item) or "Coronavirus" in str(item)):
-            headline = str(item.text.strip())
-            return headline """
 
 root = tk.Tk()
 root.geometry("450x400")
