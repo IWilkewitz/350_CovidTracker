@@ -225,12 +225,24 @@ class Application(tk.Frame):
         data = parsed.find_all("h3")
         headline = ""
         for item in data:
-            if("COVID-19" in str(item) or "Coronavirus" in str(item)):
+            if("COVID-19" in str(item) or "Coronavirus" in str(item) or "COVID" in str(item)):
                 headline = str(item.text.strip())
                 break
         
         tk.Label(newsPage, text="Most Recent Michigan Covid Headline: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
-        tk.Label(newsPage, text=str(headline), font=("Helvetica", 16), wraplength=400).grid(row=1,column=1, pady=5)
+        tk.Label(newsPage, text=str(headline), font=("Helvetica", 12), wraplength=400).grid(row=1,column=1, pady=5)
+        
+        url = 'https://news.yahoo.com/'
+        html = urllib.request.urlopen(url).read()
+        parsed = bs4.BeautifulSoup(html, "html.parser")
+        data = parsed.find_all("h3")
+        headline = ""
+        for item in data:
+            if("COVID-19" in str(item) or "Coronavirus" in str(item) or "COVID" in str(item)):
+                headline = str(item.text.strip())
+        
+        tk.Label(newsPage, text="Most Recent National Covid Headline: ", font=("Helvetica", 16)).grid(row=2,column=1, pady=5)
+        tk.Label(newsPage, text=str(headline), font=("Helvetica", 12), wraplength=400).grid(row=3,column=1, pady=5)
 
     def tracePge(self):
         conTrace = tk.Toplevel(root)
