@@ -1,8 +1,8 @@
 import tkinter as tk
 import tkinter.ttk
 from tkinter import Tk, Canvas, Frame, BOTH
-import urllib.request
-import bs4
+#import urllib.request
+#import bs4
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -219,7 +219,7 @@ class Application(tk.Frame):
         newsPage.title("COVID-19 NEWS")
         newsPage.geometry("450x400")
 
-        url = 'https://www.mlive.com/#section__news'
+        """ url = 'https://www.mlive.com/#section__news'
         html = urllib.request.urlopen(url).read()
         parsed = bs4.BeautifulSoup(html, "html.parser")
         data = parsed.find_all("h3")
@@ -239,10 +239,16 @@ class Application(tk.Frame):
         headline = ""
         for item in data:
             if("COVID-19" in str(item) or "Coronavirus" in str(item) or "COVID" in str(item)):
-                headline = str(item.text.strip())
+                headline = str(item.text.strip()) """
         
         tk.Label(newsPage, text="Most Recent National Covid Headline: ", font=("Helvetica", 16)).grid(row=2,column=1, pady=5)
-        tk.Label(newsPage, text=str(headline), font=("Helvetica", 12), wraplength=400).grid(row=3,column=1, pady=5)
+        #tk.Label(newsPage, text=str(headline), font=("Helvetica", 12), wraplength=400).grid(row=3,column=1, pady=5)
+
+        appQuit = tk.Button(newsPage, width=42, height=3)
+        appQuit["text"] = "Back"
+        appQuit["command"] = newsPage.destroy
+        appQuit["font"] = ("Helvetica", 12, "bold")
+        appQuit.grid(row=4, column=1, pady=10)
 
     def tracePge(self):
         conTrace = tk.Toplevel(root)
