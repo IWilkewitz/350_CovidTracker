@@ -1,6 +1,8 @@
 import tkinter as tk
 import tkinter.ttk
 from tkinter import Tk, Canvas, Frame, BOTH
+import time as tm
+import datetime as dt
 #import urllib.request
 #import bs4
 
@@ -205,7 +207,7 @@ class Application(tk.Frame):
         tk.Label(usrInfo, text="Phone Number: ", font=("Helvetica", 16)).grid(row=9, column=0, pady=5)
         tk.Label(usrInfo, text="Address: ", font=("Helvetica", 16)).grid(row=10,column=0, pady=5)
         tk.Label(usrInfo, text="Exposure Date: ", font=("Helvetica", 16)).grid(row=11,column=0, pady=5)
-        
+
         # #NextPage button
         edit = tk.Button(usrInfo, width=30, height=3)
         edit["text"] = "Edit User Profile"
@@ -228,10 +230,10 @@ class Application(tk.Frame):
             if("COVID-19" in str(item) or "Coronavirus" in str(item) or "COVID" in str(item)):
                 headline = str(item.text.strip())
                 break
-        
+
         tk.Label(newsPage, text="Most Recent Michigan Covid Headline: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
         tk.Label(newsPage, text=str(headline), font=("Helvetica", 12), wraplength=400).grid(row=1,column=1, pady=5)
-        
+
         url = 'https://news.yahoo.com/'
         html = urllib.request.urlopen(url).read()
         parsed = bs4.BeautifulSoup(html, "html.parser")
@@ -240,7 +242,7 @@ class Application(tk.Frame):
         for item in data:
             if("COVID-19" in str(item) or "Coronavirus" in str(item) or "COVID" in str(item)):
                 headline = str(item.text.strip()) """
-        
+
         tk.Label(newsPage, text="Most Recent National Covid Headline: ", font=("Helvetica", 16)).grid(row=2,column=1, pady=5)
         #tk.Label(newsPage, text=str(headline), font=("Helvetica", 12), wraplength=400).grid(row=3,column=1, pady=5)
 
@@ -248,7 +250,11 @@ class Application(tk.Frame):
         appQuit["text"] = "Back"
         appQuit["command"] = newsPage.destroy
         appQuit["font"] = ("Helvetica", 12, "bold")
-        appQuit.grid(row=4, column=1, pady=10)
+        appQuit.grid(row=4, column=1, padx=2, pady=1)
+
+        local_time = tm.strftime('%I:%M %p')
+        clk_lbl = tk.Label(newsPage, font = 'Helvetica', bg = 'white', fg = 'black', text = local_time)
+        clk_lbl.grid(row = 6, column = 1)
 
     def tracePge(self):
         conTrace = tk.Toplevel(root)
@@ -261,7 +267,7 @@ class Application(tk.Frame):
         tk.Entry(conTrace, width=30).grid(row=0, column=1, pady=5)
         tk.Entry(conTrace, show="•", width=30).grid(row=1, column=1, pady=5)
         tk.Entry(conTrace, show="•", width=30).grid(row=2, column=1, pady=5)
-        
+
          # #NextPage button
         addContact = tk.Button(conTrace, width=10, height=3)
         addContact["text"] = "Add"
@@ -285,13 +291,13 @@ class Application(tk.Frame):
         doneButton["font"] = ("Helvetica", 12, "bold")
         doneButton.grid(row=3, column=2)
         doneButton.config(width=10, height=3)
-    
+
     def exposure(self):
         exPage = tk.Toplevel(root)
         exPage.title("COVID-19 Survey")
         exPage.geometry("400x150")
 
-        tk.Label(exPage, text="Possible Exposure Date: ", 
+        tk.Label(exPage, text="Possible Exposure Date: ",
         font=("Helvetica", 12)).grid(row=0, column=0, pady=5)
         tk.Entry(exPage, width=40).grid(row=1, column=0, pady=5)
 
@@ -307,7 +313,7 @@ class Application(tk.Frame):
         surPage.title("COVID-19 Survey")
         surPage.geometry("250x120")
 
-        tk.Label(surPage, text="Have You Had Covid-19? ", 
+        tk.Label(surPage, text="Have You Had Covid-19? ",
         font=("Helvetica", 16)).grid(row=0, column=1, pady=5)
 
         yes = tk.Button(surPage)
