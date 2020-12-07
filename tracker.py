@@ -170,6 +170,13 @@ class Application(tk.Frame):
         forLink["command"] = self.destroy
         forLink["font"] = ("Helvetica", 10, "bold")
         forLink.grid(row=2, column=1, padx=10, pady=10)
+            # #BackPage button
+        back = tk.Button(forPass, width=15, height=3)
+        back["text"] = "Back"
+        back["command"] = forPass.destroy
+        back["font"] = ("Helvetica", 10, "bold")
+        back.grid(row=2, column=0, pady=5)
+        back.config(width=10, height=3)
 
     def editUsr(self):
         editPge = tk.Toplevel(root)
