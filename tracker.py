@@ -219,7 +219,14 @@ class Application(tk.Frame):
         edit["font"] = ("Helvetica", 12, "bold")
         edit.grid(row=11, column=0, pady=5)
         edit.config(width=35, height=3)
-
+        # #BackPage button
+        back = tk.Button(usrInfo, width=30, height=3)
+        back["text"] = "Back"
+        back["command"] = usrInfo.destroy
+        back["font"] = ("Helvetica", 12, "bold")
+        back.grid(row=11, column=6, pady=5)
+        back.config(width=10, height=3)
+        
         # profile_quit = tk.Button(usrInfo, width=10, height=2)
         # profile_quit["text"] = "Back"
         # profile_quit["command"] = loginWindow.destroy
