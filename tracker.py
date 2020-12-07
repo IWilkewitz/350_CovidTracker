@@ -3,6 +3,8 @@ import tkinter.ttk
 from tkinter import Tk, Canvas, Frame, BOTH
 import time as tm
 import datetime as dt
+import re
+from getpass import getpass
 #import urllib.request
 #import bs4
 
@@ -53,10 +55,10 @@ class Application(tk.Frame):
         tk.Label(signUpWindow2, text="Phone Number: ", font=("Helvetica", 16)).grid(row=8, column=1, pady=5)
 
         tk.Entry(signUpWindow2, width=50).grid(row=1, column=1, pady=5)
-        tk.Entry(signUpWindow2, show="•", width=50).grid(row=3, column=1, pady=5)
-        tk.Entry(signUpWindow2, show="•", width=50).grid(row=5, column=1, pady=5)
-        tk.Entry(signUpWindow2, show="•", width=50).grid(row=7, column=1, pady=5)
-        tk.Entry(signUpWindow2, show="•", width=50).grid(row=9, column=1, pady=5)
+        tk.Entry(signUpWindow2, width=50).grid(row=3, column=1, pady=5)
+        tk.Entry(signUpWindow2, width=50).grid(row=5, column=1, pady=5)
+        tk.Entry(signUpWindow2, width=50).grid(row=7, column=1, pady=5)
+        tk.Entry(signUpWindow2, width=50).grid(row=9, column=1, pady=5)
 
         # #NextPage button
         nextStep2 = tk.Button(signUpWindow2, width=30, height=3)
@@ -70,13 +72,15 @@ class Application(tk.Frame):
         signUpWindow = tk.Toplevel(root)
         signUpWindow.title("Sign Up")
         signUpWindow.geometry("450x400")
-        usernameInfo = tk.Label(signUpWindow, text="(Must Be Minimum of 8 characters)", font=("Helvetica", 12))
+        usernameInfo = tk.Label(signUpWindow, text="(8 characters: 1+ uppercase, 1+ number)", font=("Helvetica", 12))
         usernameInfo.grid(row=4, column=1, pady=5)
         tk.Label(signUpWindow, text="Choose a Username: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
         tk.Label(signUpWindow, text="Choose a Password: ", font=("Helvetica", 16)).grid(row=2, column=1, pady=5)
-
-        tk.Entry(signUpWindow, width=50).grid(row=1, column=1, pady=5)
-        tk.Entry(signUpWindow, show="•", width=50).grid(row=3, column=1, pady=5)
+        username = tk.Entry(signUpWindow, width=50).grid(row=1, column=1, pady=5)
+        password = tk.Entry(signUpWindow, show="•", width=50).grid(row=3, column=1, pady=5)
+        print(username)
+        if (is_valid_pass(password)):
+            print(password)
 
         # #NextPage button
         nextStep = tk.Button(signUpWindow, width=30, height=3)
@@ -216,6 +220,12 @@ class Application(tk.Frame):
         edit.grid(row=11, column=0, pady=5)
         edit.config(width=35, height=3)
 
+        # profile_quit = tk.Button(usrInfo, width=10, height=2)
+        # profile_quit["text"] = "Back"
+        # profile_quit["command"] = loginWindow.destroy
+        # profile_quit["font"] = ("Helvetica", 12, "bold")
+        # profile_quit.grid(row=4, column=2, pady=15)
+
     def newsPage(self):
         newsPage = tk.Toplevel(root)
         newsPage.title("COVID-19 NEWS")
@@ -265,8 +275,8 @@ class Application(tk.Frame):
         tk.Label(conTrace, text="Enter Phone Number:", font=("Helvetica", 12)).grid(row=2, column=0, pady=5)
 
         tk.Entry(conTrace, width=30).grid(row=0, column=1, pady=5)
-        tk.Entry(conTrace, show="•", width=30).grid(row=1, column=1, pady=5)
-        tk.Entry(conTrace, show="•", width=30).grid(row=2, column=1, pady=5)
+        tk.Entry(conTrace, width=30).grid(row=1, column=1, pady=5)
+        tk.Entry(conTrace, width=30).grid(row=2, column=1, pady=5)
 
          # #NextPage button
         addContact = tk.Button(conTrace, width=10, height=3)
@@ -325,6 +335,18 @@ class Application(tk.Frame):
         no["text"] = "NO"
         no["command"] = surPage.destroy
         no.grid(row=2, column=1, pady=5)
+
+def is_valid_pass(password):
+        while True:
+            password = getpass()
+            if len(password) < 8:
+                print("Password must be 8 characters.")
+            elif re.search('[0-9]', password) is None:
+                print("Password must have a number")
+            elif re.search('[A-Z]', password) is None:
+                print("Password must have one uppercase letter")
+            else:
+                break
 
 root = tk.Tk()
 root.geometry("450x400")
