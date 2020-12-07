@@ -77,7 +77,7 @@ class Application(tk.Frame):
         tk.Label(signUpWindow, text="Choose a Username: ", font=("Helvetica", 16)).grid(row=0,column=1, pady=5)
         tk.Label(signUpWindow, text="Choose a Password: ", font=("Helvetica", 16)).grid(row=2, column=1, pady=5)
         username = tk.Entry(signUpWindow, width=50).grid(row=1, column=1, pady=5)
-        password = tk.Entry(signUpWindow, show="•", width=50).grid(row=3, column=1, pady=5)
+        password = tk.Entry(signUpWindow, show="*", width=50).grid(row=3, column=1, pady=5)
         print(username)
         if (is_valid_pass(password)):
             print(password)
@@ -99,7 +99,7 @@ class Application(tk.Frame):
         tk.Label(loginWindow, text="Password: ", font=("Helvetica", 16)).grid(row=1)
 
         tk.Entry(loginWindow, width=50).grid(row=0, column=1)
-        tk.Entry(loginWindow, show="$", width=50).grid(row=1, column=1)
+        tk.Entry(loginWindow, show="*", width=50).grid(row=1, column=1)
 
         #This button closes the login screen
         loginQuit = tk.Button(loginWindow, width=30, height=3)
@@ -214,11 +214,11 @@ class Application(tk.Frame):
 
         # #NextPage button
         edit = tk.Button(usrInfo, width=30, height=3)
-        edit["text"] = "Edit User Profile"
+        edit["text"] = "Edit Info"
         edit["command"] = self.editUsr
         edit["font"] = ("Helvetica", 12, "bold")
         edit.grid(row=11, column=0, pady=5)
-        edit.config(width=35, height=3)
+        edit.config(width=15, height=3)
         # #BackPage button
         back = tk.Button(usrInfo, width=30, height=3)
         back["text"] = "Back"
