@@ -9,82 +9,8 @@ import pytest
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 import factory
-
-engine = create_engine('mysql+pymsql://mnt/c/Users/Desktop/db/')
-Session = sessionmaker()
-
-class User:
-    def __init__(self, usrnm, pswd, firstName, lastName, address, city, state, zipCode):
-        self.usrnm = usrnm
-        self.pswd = pswd
-        self.firstName = firstName
-        self.lastName = lastName
-        self.address = address
-        self.city = city
-        self.state = state
-        self.zipCode = zipCode
-
-class UserFactory(factory.Factory):
-    usrnm = factory.Faker('usrnm')
-    pswd = factory.Faker('pswd')
-    firstName = factory.Faker('firstName')
-    lastName = factory.Faker('lastName')
-    address = factory.Faker('address')
-    city = factory.Faker('city')
-    state = factory.Faker('state')
-    zipCode = factory.Faker('zipCode')
-
-    class Meta:
-        model = User
-        
-class UserModel(Base):
-    __tablename__ = 'account'
-
-    usrnm = Column(String, nullable=False)
-    pswd = Column(String, nullable=False)
-    firstName = Column(String, nullable=False)
-    lastName = Column(String, nullable=False)
-    address = Column(String, nullable=False)
-    city = Column(String, nullable=False)
-    state = Column(String, nullable=False)
-    zipCode = Column(Integer, nullable=False)
-
-class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
-    usrnm = factory.Sequence('usrnm')
-    pswd = factory.Sequence('pswd')
-    firstName = factory.Sequence('firstName')
-    lastName = factory.Sequence('lastName')
-    address = factory.Sequence('address')
-    city = factory.Sequence('city')
-    state = factory.Sequence('state')
-    zipCode = factory.Sequence('zipCode')
-
-    class Meta:
-        model = UserModel
-
-@pytest.fixture(scope='module')
-def connection():
-    connection = engine.connect()
-    yield connection
-    connection.close()
-
-@pytest.fixture(scope='function')
-def session(connection):
-    transaction = connection.begin()
-    session = Session(bind=connection)
-    yield session
-    session.close()
-    transaction.rollback()
-
-def delete_user_info(session, user_id):
-    session.query(UserModel).filter(UserModel.id==user_id).delete()
-
-
-# import unittest
-# import os
-# import sqlalchemy
-#import urllib.request
-#import bs4
+from sqlalchemy import Column, Date, Integer, String
+import urllib.request
 
 # class TestDB(unittest.TestCase):
 #     def setUp(self):
@@ -95,9 +21,6 @@ def delete_user_info(session, user_id):
 #         self.connection = self.engine.connect()
 #         self.connection.execute("CREATE DATABASE testdb")
         
-
-
-
 class Application(tk.Frame):
     """
     COVID-19 Contact Tracing Desktop Application
@@ -179,7 +102,7 @@ class Application(tk.Frame):
         signUpWindow2.title("Sign Up")
         signUpWindow2.geometry("450x400")
 
-        conn = connect_db('user_info_db.db')
+        conn = connect_db('sqlite:///C:\\Users\\Desktop\\user_info_db.db')
 
         # Creating the cursor to manipulate the database
         c = conn.cursor()
@@ -199,7 +122,7 @@ class Application(tk.Frame):
         # Create submission
         def submit_info():
             # Create the user info DB
-            conn = sqlite3.connect('user_info_db.db')
+            conn = sqlite3.connect('sqlite:///C:\\Users\\Desktop\\user_info_db.db')
 
             # Create the cursor
             c = conn.cursor()
@@ -234,7 +157,7 @@ class Application(tk.Frame):
 
         # Create the querying function
         def output_records():
-            conn = sqlite3.connect('user_info_db.db')
+            conn = sqlite3.connect('sqlite:///C:\\Users\\Desktop\\user_info_db.db')
 
             c = conn.cursor()
 
@@ -611,7 +534,81 @@ def is_valid_pass(password):
                 print("Password must have one uppercase letter")
             else:
                 break
-UserFactory.build()
+
+engine = create_engine('sqlite:///C:\\Users\\Desktop\\user_info_db.db')
+Session = sessionmaker()
+
+@pytest.fixture(scope='module')
+def connection():
+    connection = engine.connect()
+    yield connection
+    connection.close
+
+@pytest.fixture(scope='function')
+def session(connection):
+    transaction = connection.begin()
+    UserFactory.meta.sqlalchemy_session = session
+    session = Session(bind=connection)
+    yield session
+    session.close()
+    transaction.rollback()
+
+def test_case(session):
+    user = userFactory.create()
+    assert session.query(UserModel).one()
+
+    
+
+class User:
+    def __init__(self, usrnm, pswd, firstName, lastName, address, city, state, zipCode):
+        
+        self.usrnm = usrnm
+        self.pswd = pswd
+        self.firstName = firstName
+        self.lastName = lastName
+        self.address = address
+        self.city = city
+        self.state = state
+        self.zipCode = zipCode
+
+class UserFactory(factory.Factory):
+    usrnm = factory.Faker('usrnm')
+    pswd = factory.Faker('pswd')
+    firstName = factory.Faker('firstName')
+    lastName = factory.Faker('lastName')
+    address = factory.Faker('address')
+    city = factory.Faker('city')
+    state = factory.Faker('state')
+    zipCode = factory.Faker('zipCode')
+
+    class Meta:
+        model = User
+        
+class UserModel:
+    __tablename__ = 'account'
+
+    usrnm = Column(String, nullable=False)
+    pswd = Column(String, nullable=False)
+    firstName = Column(String, nullable=False)
+    lastName = Column(String, nullable=False)
+    address = Column(String, nullable=False)
+    city = Column(String, nullable=False)
+    state = Column(String, nullable=False)
+    zipCode = Column(Integer, nullable=False)
+
+class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
+    usrnm = factory.Sequence('usrnm')
+    pswd = factory.Sequence('pswd')
+    firstName = factory.Sequence('firstName')
+    lastName = factory.Sequence('lastName')
+    address = factory.Sequence('address')
+    city = factory.Sequence('city')
+    state = factory.Sequence('state')
+    zipCode = factory.Sequence('zipCode')
+
+    class Meta:
+        model = UserModel
+
 root = tk.Tk()
 root.geometry("450x400")
 #root.configure(bg='#8cdbed')
