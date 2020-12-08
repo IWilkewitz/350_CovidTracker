@@ -5,8 +5,98 @@ import time as tm
 import datetime as dt
 import re
 from getpass import getpass
+import pytest
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+import factory
+
+engine = create_engine('mysql+pymsql://mnt/c/Users/Desktop/db/')
+Session = sessionmaker()
+
+class User:
+    def __init__(self, usrnm, pswd, firstName, lastName, address, city, state, zipCode):
+        self.usrnm = usrnm
+        self.pswd = pswd
+        self.firstName = firstName
+        self.lastName = lastName
+        self.address = address
+        self.city = city
+        self.state = state
+        self.zipCode = zipCode
+
+class UserFactory(factory.Factory):
+    usrnm = factory.Faker('usrnm')
+    pswd = factory.Faker('pswd')
+    firstName = factory.Faker('firstName')
+    lastName = factory.Faker('lastName')
+    address = factory.Faker('address')
+    city = factory.Faker('city')
+    state = factory.Faker('state')
+    zipCode = factory.Faker('zipCode')
+
+    class Meta:
+        model = User
+        
+class UserModel(Base):
+    __tablename__ = 'account'
+
+    usrnm = Column(String, nullable=False)
+    pswd = Column(String, nullable=False)
+    firstName = Column(String, nullable=False)
+    lastName = Column(String, nullable=False)
+    address = Column(String, nullable=False)
+    city = Column(String, nullable=False)
+    state = Column(String, nullable=False)
+    zipCode = Column(Integer, nullable=False)
+
+class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
+    usrnm = factory.Sequence('usrnm')
+    pswd = factory.Sequence('pswd')
+    firstName = factory.Sequence('firstName')
+    lastName = factory.Sequence('lastName')
+    address = factory.Sequence('address')
+    city = factory.Sequence('city')
+    state = factory.Sequence('state')
+    zipCode = factory.Sequence('zipCode')
+
+    class Meta:
+        model = UserModel
+
+@pytest.fixture(scope='module')
+def connection():
+    connection = engine.connect()
+    yield connection
+    connection.close()
+
+@pytest.fixture(scope='function')
+def session(connection):
+    transaction = connection.begin()
+    session = Session(bind=connection)
+    yield session
+    session.close()
+    transaction.rollback()
+
+def delete_user_info(session, user_id):
+    session.query(UserModel).filter(UserModel.id==user_id).delete()
+
+
+# import unittest
+# import os
+# import sqlalchemy
 #import urllib.request
 #import bs4
+
+# class TestDB(unittest.TestCase):
+#     def setUp(self):
+#         url = os.getenv("user_info_db.db")
+#         if not url:
+#             self.skipTest("No Database URL set")
+#         self.engine = sqlalchemy.create_engine(url)
+#         self.connection = self.engine.connect()
+#         self.connection.execute("CREATE DATABASE testdb")
+        
+
+
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -361,7 +451,7 @@ def is_valid_pass(password):
                 print("Password must have one uppercase letter")
             else:
                 break
-
+UserFactory.build()
 root = tk.Tk()
 root.geometry("450x400")
 #root.configure(bg='#8cdbed')
