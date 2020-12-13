@@ -7,6 +7,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Base, UserModel
 from tracker import Application
+import factory
 import pytest
 
 # Connect to the database and create the schema within a transaction
