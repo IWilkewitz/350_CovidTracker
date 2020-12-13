@@ -5,13 +5,9 @@ import time as tm
 import datetime as dt
 import re
 from getpass import getpass
-import pytest
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
-from unittest.mock import patch, MagicMock
-import factory
 from sqlalchemy import Column, Date, Integer, String
 import urllib.request
+import sys
 
 class Application(tk.Frame):
     """
@@ -526,84 +522,6 @@ def is_valid_pass(password):
                 print("Password must have one uppercase letter")
             else:
                 break
-
-# class User:
-#     def __init__(self,  f_name, l_name, address, city, state, zipCode, usrnm, pswd):
-#         self.f_name = f_name
-#         self.l_name = l_name
-#         self.address = addres
-#         self.city = city
-#         self.state = state
-#         self.zipCode = zipCode
-#         self.usrnm = usrnm
-#         self.pswd = pswd
-
-# class UserFactory(factory.Factory):
-#     f_name = factory.Faker('f_name')
-#     l_name = factory.Faker('l_name')
-#     address = factory.Faker('address')
-#     city = factory.Faker('city')
-#     state = factory.Faker('state')
-#     zipCode = factory.Faker('zipCode')
-#     usrnm = factory.Faker('usrnm')
-#     pswd = factory.Faker('pswd')
-#     class meta:
-#         Model = User
-        
-# class UserModel:
-#     __tablename__ = 'account'
-#     f_name = Column(String, nullable=False)
-#     l_name = Column(String, nullable=False)
-#     address = Column(String, nullable=False)
-#     city = Column(String, nullable=False)
-#     state = Column(String, nullable=False)
-#     zipCode = Column(Integer, nullable=False)
-#     usrnm = Column(String, nullable=False)
-#     pswd = Column(String, nullable=False)
-    
-# class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
-#     f_name = factory.Faker('f_name')
-#     l_name = factory.Faker('l_name')
-#     address = factory.Faker('address')
-#     city = factory.Faker('city')
-#     state = factory.Faker('state')
-#     zipCode = factory.Faker('zipCode')
-#     usrnm = factory.Faker('usrnm')
-#     pswd = factory.Faker('pswd')
-
-#     class Meta:
-#         model = UserModel
-
-# engine = create_engine('sqlite:///C:\\Users\\Desktop\\user_info_db.db')
-# Session = sessionmaker()
-
-# @pytest.fixture(scope='module')
-# def connection():
-#     connection = engine.connect()
-#     yield connection
-#     connection.close
-
-# @pytest.fixture(scope='function')
-# def session(connection):
-#     transaction = connection.begin()
-#     UserFactory.meta.sqlalchemy_session = session
-#     session = Session(bind=connection)
-#     yield session
-#     session.close()
-#     transaction.rollback()
-
-# def delete_usr_data(session, user_usrnm):
-#     session.query(UserModel).filter(UserModel.id).delete()
-
-# def delete_user_test(session):
-#     user = UserFactory.create()
-#     assert session.query(UserModel).one()
-
-#     delete_usr_data(session, user.usrnm)
-
-#     result = session.query(UserModel).one_or_none()
-#     assert result is None
-
 
 root = tk.Tk()
 root.geometry("450x400")
