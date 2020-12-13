@@ -80,21 +80,21 @@ class Application(tk.Frame):
         database, user_info_db.
         """
 
-        def connect_db(file_db):
-            conn = None
+#         def connect_db(file_db):
+#             conn = None
 
-            try:
-                conn = sqlite3.connect(file_db)
-            except Error as e:
-                print(e)
+#             try:
+#                 conn = sqlite3.connect(file_db)
+#             except Error as e:
+#                 print(e)
 
-            return conn
+#             return conn
 
         signUpWindow2 = tk.Toplevel(root)
         signUpWindow2.title("Sign Up")
         signUpWindow2.geometry("450x400")
 
-        conn = connect_db('sqlite:///C:\\Users\\Desktop\\user_info_db.db')
+        conn = sqlite3.connect('sqlite:///C:\\Users\\Desktop\\user_info_db.db')
 
         # Creating the cursor to manipulate the database
         c = conn.cursor()
