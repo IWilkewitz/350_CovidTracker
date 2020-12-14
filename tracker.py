@@ -595,16 +595,16 @@ def is_valid_pass(password):
     numeric values.
     """
     
-        while True:
-            password = getpass()
-            if len(password) < 8:
-                print("Password must be 8 characters.")
-            elif re.search('[0-9]', password) is None:
-                print("Password must have a number")
-            elif re.search('[A-Z]', password) is None:
-                print("Password must have one uppercase letter")
-            else:
-                break
+    while True:
+        password = getpass()
+        if len(password) < 8:
+            print("Password must be 8 characters.")
+        elif re.search('[0-9]', password) is None:
+            print("Password must have a number")
+        elif re.search('[A-Z]', password) is None:
+            print("Password must have one uppercase letter")
+        else:
+            break
 
 root = tk.Tk()
 root.geometry("450x400")
