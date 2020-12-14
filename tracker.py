@@ -76,16 +76,6 @@ class Application(tk.Frame):
         database, user_info_db.
         """
 
-#         def connect_db(file_db):
-#             conn = None
-
-#             try:
-#                 conn = sqlite3.connect(file_db)
-#             except Error as e:
-#                 print(e)
-
-#             return conn
-
         signUpWindow2 = tk.Toplevel(root)
         signUpWindow2.title("Sign Up")
         signUpWindow2.geometry("450x400")
@@ -107,8 +97,15 @@ class Application(tk.Frame):
                 password text
                 )""")
 
-        # Create submission
         def submit_info():
+            """
+            Inserting the user's information to the database
+            
+            A function that will connect to the existing database and insert
+            a user's information to the corresponding rows.  This information
+            is collected from a user's entries into the text boxes in the 
+            signup window.
+            """
             # Create the user info DB
             conn = sqlite3.connect('sqlite:///user_info_db.db')
 
@@ -143,8 +140,13 @@ class Application(tk.Frame):
             u_name.delete(0, tk.END)
             p_word.delete(0, tk.END)
 
-        # Create the querying function
         def output_records():
+            """
+            Creating the querying function
+            
+            A function that will print the records of all users within
+            the database.  
+            """
             conn = sqlite3.connect('sqlite:///user_info_db.db')
 
             c = conn.cursor()
@@ -229,6 +231,14 @@ class Application(tk.Frame):
         padx = 10, ipadx = 140)
 
     def loginpage(self):
+        """
+        Letting existing users log in
+        
+        A function to allow a returning user to log in to the application.
+        If they forgot their password, they are prompted with a new window
+        to enter either their phone number or email associated with the 
+        account to start the password recovery process.
+        """
         loginWindow = tk.Toplevel(root)
         loginWindow.title("Login Window")
         loginWindow.geometry("450x400")
@@ -263,6 +273,14 @@ class Application(tk.Frame):
         logBut.grid(row=2, column=1, pady=15)
 
     def appPage(self):
+        """
+        Creating the home screen
+        
+        A function that displays the home screen of MegaTrace with which
+        the user can navigate the rest of the application, such as reading
+        COVID-19 related news, fill out an exposure survey, check and/or
+        update their personal information, or log out of the application.
+        """
         appPage = tk.Toplevel(root)
         appPage.title("Application")
         appPage.geometry("450x400")
@@ -512,6 +530,14 @@ class Application(tk.Frame):
         no.grid(row=2, column=1, pady=5)
 
 def is_valid_pass(password):
+    """
+    Verifying a new user's password
+    
+    A function to check if a user making a new account has created a
+    password matching the criteria.  The password must be an 
+    8-character mixture of uppercase and lowercase letters as well as
+    numeric values.
+    """
         while True:
             password = getpass()
             if len(password) < 8:
