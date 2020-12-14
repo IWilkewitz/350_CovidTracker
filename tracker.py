@@ -106,6 +106,7 @@ class Application(tk.Frame):
             is collected from a user's entries into the text boxes in the 
             signup window.
             """
+            
             # Create the user info DB
             conn = sqlite3.connect('sqlite:///user_info_db.db')
 
@@ -147,6 +148,7 @@ class Application(tk.Frame):
             A function that will print the records of all users within
             the database.  
             """
+            
             conn = sqlite3.connect('sqlite:///user_info_db.db')
 
             c = conn.cursor()
@@ -239,6 +241,7 @@ class Application(tk.Frame):
         to enter either their phone number or email associated with the 
         account to start the password recovery process.
         """
+        
         loginWindow = tk.Toplevel(root)
         loginWindow.title("Login Window")
         loginWindow.geometry("450x400")
@@ -281,6 +284,7 @@ class Application(tk.Frame):
         COVID-19 related news, fill out an exposure survey, check and/or
         update their personal information, or log out of the application.
         """
+        
         appPage = tk.Toplevel(root)
         appPage.title("Application")
         appPage.geometry("450x400")
@@ -313,6 +317,14 @@ class Application(tk.Frame):
         news.grid(row=1, column=1, padx=10, pady=10)
 
     def forgotPass(self):
+        """
+        Starting the password reset process
+        
+        A function that prompts the user for an email address or phone 
+        number to receive a password reset link in the event that they
+        have forgotten their current one.
+        """
+        
         forPass = tk.Toplevel(root)
         forPass.title("Forgot Password")
         forPass.geometry("450x400")
@@ -340,6 +352,13 @@ class Application(tk.Frame):
         back.config(width=10, height=3)
 
     def editUsr(self):
+        """
+        Creating or editing user information
+        
+        A function to allow a new user to enter or an exisiting user to
+        edit their name, date of birth, email address, and phone number.
+        """
+        
         editPge = tk.Toplevel(root)
         editPge.title("Sign Up")
         editPge.geometry("450x450")
@@ -370,6 +389,16 @@ class Application(tk.Frame):
         save.config(width=35, height=3)
 
     def userPage(self):
+        """
+        Showing the user's personal information
+        
+        A function to create the user profile page that allows a user to 
+        view as well as update their personal information, including:
+        first and last name, birthday, email address, phone number, and
+        exposure date, if relevant.  If they choose to update the 
+        information, the edit user window is opened.
+        """
+        
         usrInfo = tk.Toplevel(root)
         usrInfo.title("User Profile")
         usrInfo.geometry("450x400")
@@ -399,13 +428,16 @@ class Application(tk.Frame):
         edit.grid(row=11, column=0, pady=5)
         edit.config(width=35, height=3)
 
-        # profile_quit = tk.Button(usrInfo, width=10, height=2)
-        # profile_quit["text"] = "Back"
-        # profile_quit["command"] = loginWindow.destroy
-        # profile_quit["font"] = ("Helvetica", 12, "bold")
-        # profile_quit.grid(row=4, column=2, pady=15)
-
     def newsPage(self):
+        """
+        Displaying recent and relevant headlines
+        
+        A function to show the user recent headlines related to 
+        COVID-19 by using a webscraper parse news websites for 
+        headlines related to COVID-19, searching for relevant
+        keywords.
+        """
+        
         newsPage = tk.Toplevel(root)
         newsPage.title("COVID-19 NEWS")
         newsPage.geometry("450x400")
@@ -448,6 +480,14 @@ class Application(tk.Frame):
         clk_lbl.grid(row = 6, column = 1)
 
     def tracePge(self):
+        """
+        Entering exposed contacts
+        
+        A function that prompts the user to enter contact information
+        in the contact tracing information window for people that they 
+        have potentially exposed to COVID-19.
+        """
+        
         conTrace = tk.Toplevel(root)
         conTrace.title("Contact Tracing Information")
         conTrace.geometry("450x200")
@@ -487,6 +527,13 @@ class Application(tk.Frame):
         doneButton.config(width=10, height=3)
 
     def exposure(self):
+        """
+        Defining the exposure date
+        
+        A function to allow the user to select, from a calendar, a 
+        date that indicates when they were exposed to COVID-19.
+        """
+        
         exPage = tk.Toplevel(root)
         exPage.title("COVID-19 Survey")
         exPage.geometry("400x150")
@@ -512,11 +559,20 @@ class Application(tk.Frame):
         trace.config(width=35, height=3)
 
     def survey(self):
+        """
+        Creating the exposure survey
+        
+        A function to allow the user to indicate whether they have
+        had possible exposure to COVID-19.  If they have, the 
+        application initiates the process of entering the user's 
+        friends and family's contact information.
+        """
+        
         surPage = tk.Toplevel(root)
         surPage.title("COVID-19 Survey")
         surPage.geometry("250x120")
 
-        tk.Label(surPage, text="Have You Had Covid-19? ",
+        tk.Label(surPage, text="Have You Been Exposed to Covid-19? ",
         font=("Helvetica", 16)).grid(row=0, column=1, pady=5)
 
         yes = tk.Button(surPage)
@@ -538,6 +594,7 @@ def is_valid_pass(password):
     8-character mixture of uppercase and lowercase letters as well as
     numeric values.
     """
+    
         while True:
             password = getpass()
             if len(password) < 8:
